@@ -1,0 +1,16 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="DebugLocal" />
+    <BuildType Name="Release" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="SalesReport.rptproj">
+    <Deploy />
+  </Project>
+  <Project Path="SalesReport.Web/SalesReport.Web.csproj" Id="6e1c25cb-c90b-40b0-9386-1c1684a4d47a">
+    <BuildType Solution="DebugLocal|*" Project="Debug" />
+  </Project>
+</Solution>

@@ -1,0 +1,49 @@
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Visual Studio cache
+*.cache
+*.pdb
+*.ilk
+*.log
+
+# NuGet
+packages/
+*.nupkg
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+
+# User-specific settings
+*.userprefs
+
+# IIS Express
+*.iisexpress/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Test results
+[Tt]est[Rr]esult*/
