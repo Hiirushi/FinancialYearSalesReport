@@ -8,8 +8,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid p-4">
-
-        <!-- Page Heading -->
         <div class="mb-4">
             <h2>Three Year Sales Comparison</h2>
         </div>
