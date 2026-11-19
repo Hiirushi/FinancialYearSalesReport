@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.10.12224.181</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-11-18T06:22:47.2766693Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-11-19T11:39:43.9874122Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -66,6 +66,30 @@
         </Field>
       </Fields>
     </DataSet>
+    <DataSet Name="dsFinancialYears">
+      <Query>
+        <DataSourceName>ThreeYearSalesDataset</DataSourceName>
+        <CommandText>SELECT DISTINCT FinancialYear
+
+FROM dbo.rpt_Sales
+
+WHERE FinancialYear &gt;= (
+    
+  SELECT MIN(FinancialYear) + 2
+
+  FROM dbo.rpt_Sales
+
+)
+
+ORDER BY FinancialYear;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="FinancialYear">
+          <DataField>FinancialYear</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
   </DataSets>
   <ReportSections>
     <ReportSection>
@@ -75,16 +99,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.35in</Width>
+                  <Width>1.76671in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.2in</Width>
+                  <Width>1.03328in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.2in</Width>
+                  <Width>0.99167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.2in</Width>
+                  <Width>1.05833in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -695,7 +719,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.64167in</Size>
+                    <Size>1.39167in</Size>
                     <CellContents>
                       <Textbox Name="Textbox21">
                         <CanGrow>true</CanGrow>
@@ -749,7 +773,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1.64167in</Size>
+                    <Size>1.39167in</Size>
                     <CellContents>
                       <Textbox Name="SalesPerson1">
                         <CanGrow>true</CanGrow>
@@ -782,6 +806,7 @@
                           <PaddingBottom>2pt</PaddingBottom>
                         </Style>
                       </Textbox>
+                      <rd:Selected>true</rd:Selected>
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>
@@ -799,7 +824,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.64167in</Size>
+                    <Size>1.39167in</Size>
                     <CellContents>
                       <Textbox Name="Textbox28">
                         <CanGrow>true</CanGrow>
@@ -839,24 +864,104 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ThreeYearSalesDataset</DataSetName>
-            <Top>0.80835in</Top>
-            <Left>0.52166in</Left>
+            <Top>0.19169in</Top>
+            <Left>0.52159in</Left>
             <Height>1.33332in</Height>
-            <Width>6.59167in</Width>
+            <Width>6.24166in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Tablix>
-          <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>="Year: FY" &amp; Parameters!FinancialYear.Value &amp;
+        </ReportItems>
+        <Height>1.7in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>7.405in</Width>
+      <Page>
+        <PageHeader>
+          <Height>0.95778in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!ReportTitle.Value</Value>
+                      <Style>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Top>0.15223in</Top>
+              <Left>0.52153in</Left>
+              <Height>0.25in</Height>
+              <Width>6.59163in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!ReportTitle1.Value</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                        <Color>DimGray</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Top>0.40223in</Top>
+              <Left>0.5215in</Left>
+              <Height>0.25in</Height>
+              <Width>6.59163in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Year: FY" &amp; Parameters!FinancialYear.Value &amp;
 " | Month: " &amp;
 Choose(
     CInt(Parameters!FinancialMonth.Value),
@@ -867,105 +972,24 @@ Choose(
 " | Type: " &amp;
 IIF(
     UCase(Parameters!SelectionType.Value) = "MONTH",
-    "Month",
+    "Monthly",
     "Year To Date"
 )</Value>
-                    <Style>
-                      <FontStyle>Italic</FontStyle>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0.52501in</Top>
-            <Left>0.52166in</Left>
-            <Height>0.25in</Height>
-            <Width>6.59166in</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox3">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!ReportTitle.Value</Value>
-                    <Style>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>0.155in</Top>
-            <Left>0.52166in</Left>
-            <Height>0.25in</Height>
-            <Width>6.59163in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-        </ReportItems>
-        <Height>2.30833in</Height>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Body>
-      <Width>7.405in</Width>
-      <Page>
-        <PageHeader>
-          <Height>0.69167in</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Textbox Name="Textbox43">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Three Year Sales Comparison Report</Value>
                       <Style>
-                        <FontSize>16pt</FontSize>
+                        <FontStyle>Italic</FontStyle>
                         <FontWeight>Bold</FontWeight>
-                        <Color>DarkBlue</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox43</rd:DefaultName>
-              <Top>0.26389in</Top>
-              <Left>1.89667in</Left>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>0.65223in</Top>
+              <Left>0.52147in</Left>
               <Height>0.25in</Height>
-              <Width>4.18333in</Width>
+              <Width>6.59166in</Width>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -984,7 +1008,7 @@ IIF(
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.61333in</Height>
+          <Height>0.41333in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1026,7 +1050,7 @@ IIF(
         </PageFooter>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.2in</LeftMargin>
+        <LeftMargin>0.5in</LeftMargin>
         <RightMargin>0.2in</RightMargin>
         <TopMargin>0.5in</TopMargin>
         <BottomMargin>0.5in</BottomMargin>
@@ -1043,7 +1067,16 @@ IIF(
         </Values>
       </DefaultValue>
       <AllowBlank>true</AllowBlank>
-      <Prompt>Report Title</Prompt>
+      <Prompt>Report Title : </Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ReportTitle1">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Three Year Sales Comparison</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Report Title1 : </Prompt>
     </ReportParameter>
     <ReportParameter Name="FinancialYear">
       <DataType>String</DataType>
@@ -1052,7 +1085,14 @@ IIF(
           <Value>2019</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Financial Year</Prompt>
+      <Prompt>Financial Year : </Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>dsFinancialYears</DataSetName>
+          <ValueField>FinancialYear</ValueField>
+          <LabelField>FinancialYear</LabelField>
+        </DataSetReference>
+      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="FinancialMonth">
       <DataType>String</DataType>
@@ -1061,7 +1101,59 @@ IIF(
           <Value>5</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Financial Month</Prompt>
+      <Prompt>Financial Month : </Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>1</Value>
+            <Label>July</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>2</Value>
+            <Label>August</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>3</Value>
+            <Label>September</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>4</Value>
+            <Label>October</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>5</Value>
+            <Label>November</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>6</Value>
+            <Label>December</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>7</Value>
+            <Label>January</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>8</Value>
+            <Label>February</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>9</Value>
+            <Label>March</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>10</Value>
+            <Label>April</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>11</Value>
+            <Label>May</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>12</Value>
+            <Label>June</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="SelectionType">
       <DataType>String</DataType>
@@ -1070,11 +1162,28 @@ IIF(
           <Value>MONTH</Value>
         </Values>
       </DefaultValue>
-      <Prompt>Selection Type</Prompt>
+      <Prompt>Selection Type : </Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>MONTH</Value>
+            <Label>Monthly</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>YTD</Value>
+            <Label>Year to Date (YTD)</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="ExpandDetails">
       <DataType>Boolean</DataType>
-      <Prompt>Expand Customer Details</Prompt>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Expand Customer Details : </Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
@@ -1085,17 +1194,17 @@ IIF(
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>FinancialYear</ParameterName>
+          <ParameterName>ReportTitle1</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>FinancialMonth</ParameterName>
+          <ParameterName>FinancialYear</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>SelectionType</ParameterName>
+          <ParameterName>FinancialMonth</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1104,6 +1213,11 @@ IIF(
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>SelectionType</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>ExpandDetails</ParameterName>
         </CellDefinition>

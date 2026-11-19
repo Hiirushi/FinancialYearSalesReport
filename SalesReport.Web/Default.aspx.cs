@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Web.Services;
 using System.Web.UI;
+using Microsoft.Reporting.WebForms;
 
 namespace SalesReport.Web
 {
@@ -11,43 +8,15 @@ namespace SalesReport.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        [WebMethod(EnableSession = false)]
-        public static List<int> GetFinancialYears()
-        {
-            List<int> financialYears = new List<int>();
-
-            string connectionString =
-                ConfigurationManager.ConnectionStrings["TestDBConnection"].ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (!IsPostBack)
             {
-                string query = @"
-            SELECT DISTINCT FinancialYear
-            FROM dbo.rpt_Sales
-            WHERE FinancialYear >= (
-                SELECT MIN(FinancialYear) + 2
-                FROM dbo.rpt_Sales
-            )
-            ORDER BY FinancialYear;";
+                ReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
+                ReportViewer.ServerReport.ReportServerUrl =
+                    new Uri("http://localhost/ReportServer");
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            financialYears.Add(Convert.ToInt32(reader["FinancialYear"]));
-                        }
-                    }
-                }
+                ReportViewer.ServerReport.ReportPath =
+                    "/SalesReport/ThreeYearSalesComparison";
             }
-
-            return financialYears;
         }
     }
 }

@@ -7,6 +7,12 @@
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
   </Folder>
+  <Project Path="../SalesReport.BusinessLogic/SalesReport.BusinessLogic.csproj" Id="2a2892c3-b28b-4aab-8c04-fe292e29b392">
+    <BuildType Solution="DebugLocal|*" Project="Debug" />
+  </Project>
+  <Project Path="../SalesReport.DataAccess/SalesReport.DataAccess.csproj" Id="f57c70a4-6f27-46e2-bdfc-ea55604c5aac">
+    <BuildType Solution="DebugLocal|*" Project="Debug" />
+  </Project>
   <Project Path="SalesReport.rptproj">
     <Deploy />
   </Project>
