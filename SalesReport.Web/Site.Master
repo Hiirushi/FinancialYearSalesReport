@@ -15,6 +15,7 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="css/site.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <form runat="server">
@@ -36,6 +37,31 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
+
+
+        
+<ul class="navbar-nav flex-row align-items-center gap-2 ms-auto">
+
+    <li class="nav-item">
+        <a class="nav-link px-3 py-2 rounded-2 report-nav-link"
+           runat="server"
+           href="~/Default.aspx">
+            <i class="bi bi-bar-chart-line me-2"></i>
+            Three Year Sales Comparison
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link px-3 py-2 rounded-2 report-nav-link"
+           runat="server"
+           href="~/PnLReport.aspx">
+            <i class="bi bi-graph-up-arrow me-2"></i>
+            P&amp;L 12 Months Report
+        </a>
+    </li>
+
+</ul>
+
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

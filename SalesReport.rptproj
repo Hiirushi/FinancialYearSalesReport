@@ -49,9 +49,13 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
+    <DataSet Include="dsPnL12Months.rsd" />
+  </ItemGroup>
+  <ItemGroup>
     <DataSource Include="TestDB_DataSource.rds" />
   </ItemGroup>
   <ItemGroup>
+    <Report Include="PnL12Months.rdl" />
     <Report Include="ThreeYearSalesComparison.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />

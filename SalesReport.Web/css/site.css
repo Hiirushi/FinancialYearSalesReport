@@ -32,3 +32,23 @@ label {
 #applyFilters {
     width: 130px;
 }
+
+.report-nav-link {
+    color: #495057 !important;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 14px !important;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+    .report-nav-link:hover {
+        background-color: #B0C4DE;
+        color: #212529 !important;
+    }
+
+    .report-nav-link:focus {
+        background-color: #B0C4DE;
+        outline: none;
+    }
+
