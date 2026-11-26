@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.10.12224.181</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-11-25T16:33:15.1785183Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-11-26T02:14:31.2324119Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -22,34 +22,40 @@
     <DataSource Name="dsThreeYearSalesComparison">
       <ConnectionProperties>
         <DataProvider>XML</DataProvider>
-        <ConnectString>http://localhost:50786/ThreeYearSalesComparisonSoapService.asmx</ConnectString>
+        <ConnectString>http://localhost:50786/WebServices/ThreeYearSalesComparisonSoapService.asmx</ConnectString>
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>49502698-31d3-4ed2-986c-b39d963b4afe</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="dsFinancialYears">
+      <ConnectionProperties>
+        <DataProvider>XML</DataProvider>
+        <ConnectString>http://localhost:50786/WebServices/FinancialYearSoapService.asmx</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>5b051406-ec62-4747-b1e8-2af947facbed</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsFinancialYears">
+    <DataSet Name="dsThreeYearSalesFinancialYears">
       <Query>
-        <DataSourceName>ThreeYearSalesDataset</DataSourceName>
-        <CommandText>SELECT DISTINCT FinancialYear
-
-FROM dbo.rpt_Sales
-
-WHERE FinancialYear &gt;= (
-    
-  SELECT MIN(FinancialYear) + 2
-
-  FROM dbo.rpt_Sales
-
-)
-
-ORDER BY FinancialYear;</CommandText>
+        <DataSourceName>dsFinancialYears</DataSourceName>
+        <CommandText>&lt;Query&gt;
+  &lt;Method Namespace="http://tempuri.org/" Name="GetThreeYearSalesFinancialYears" /&gt;
+  &lt;SoapAction&gt;http://tempuri.org/GetThreeYearSalesFinancialYears&lt;/SoapAction&gt;
+  &lt;ElementPath IgnoreNamespaces="true"&gt;
+    GetThreeYearSalesFinancialYearsResponse/GetThreeYearSalesFinancialYearsResult/FinancialYearModel
+  &lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
       </Query>
       <Fields>
+        <Field Name="xmlns">
+          <DataField>xmlns</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="FinancialYear">
           <DataField>FinancialYear</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -963,7 +969,7 @@ IIF(
       <Prompt>Financial Year : </Prompt>
       <ValidValues>
         <DataSetReference>
-          <DataSetName>dsFinancialYears</DataSetName>
+          <DataSetName>dsThreeYearSalesFinancialYears</DataSetName>
           <ValueField>FinancialYear</ValueField>
           <LabelField>FinancialYear</LabelField>
         </DataSetReference>

@@ -247,12 +247,13 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\site.css" />
+    <Content Include="WebServices\FinancialYearSoapService.asmx" />
     <Content Include="js\jquery.min.js" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PnLReport.aspx" />
-    <Content Include="PnLReportSoapService.asmx" />
+    <Content Include="WebServices\PnLReportSoapService.asmx" />
     <Content Include="SalesReport.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -323,7 +324,7 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ThreeYearSalesComparisonSoapService.asmx" />
+    <Content Include="WebServices\ThreeYearSalesComparisonSoapService.asmx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -353,6 +354,10 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebServices\FinancialYearSoapService.asmx.cs">
+      <DependentUpon>FinancialYearSoapService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -363,7 +368,7 @@
     <Compile Include="PnLReport.aspx.designer.cs">
       <DependentUpon>PnLReport.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PnLReportSoapService.asmx.cs">
+    <Compile Include="WebServices\PnLReportSoapService.asmx.cs">
       <DependentUpon>PnLReportSoapService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
@@ -390,7 +395,7 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="ThreeYearSalesComparisonSoapService.asmx.cs">
+    <Compile Include="WebServices\ThreeYearSalesComparisonSoapService.asmx.cs">
       <DependentUpon>ThreeYearSalesComparisonSoapService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>

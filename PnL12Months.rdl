@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.10.12224.181</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-11-25T17:30:32.0407412Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-11-26T02:19:45.2222298Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -22,23 +22,40 @@
     <DataSource Name="PnLReportXMLDataSource">
       <ConnectionProperties>
         <DataProvider>XML</DataProvider>
-        <ConnectString>http://localhost:50786/PnLReportSoapService.asmx</ConnectString>
+        <ConnectString>http://localhost:50786/WebServices/PnLReportSoapService.asmx</ConnectString>
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>82d176e6-2964-47b1-ac7c-6cf2e21b620f</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="dsFinancialYears">
+      <ConnectionProperties>
+        <DataProvider>XML</DataProvider>
+        <ConnectString>http://localhost:50786/WebServices/FinancialYearSoapService.asmx</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>99ccea8d-19ec-459d-8a07-714f6e23daba</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsFinancialYears">
+    <DataSet Name="dsPnLFinancialYears">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
-        <CommandType>StoredProcedure</CommandType>
-        <CommandText>usp_GetPnLFinancialYears</CommandText>
+        <DataSourceName>dsFinancialYears</DataSourceName>
+        <CommandText>&lt;Query&gt;
+  &lt;Method Namespace="http://tempuri.org/" Name="GetPnLFinancialYears" /&gt;
+  &lt;SoapAction&gt;http://tempuri.org/GetPnLFinancialYears&lt;/SoapAction&gt;
+  &lt;ElementPath IgnoreNamespaces="true"&gt;
+    GetPnLFinancialYearsResponse/GetPnLFinancialYearsResult/FinancialYearModel
+  &lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
       </Query>
       <Fields>
+        <Field Name="xmlns">
+          <DataField>xmlns</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="FinancialYear">
           <DataField>FinancialYear</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -844,7 +861,7 @@
       <Prompt>Financial Year : </Prompt>
       <ValidValues>
         <DataSetReference>
-          <DataSetName>dsFinancialYears</DataSetName>
+          <DataSetName>dsPnLFinancialYears</DataSetName>
           <ValueField>FinancialYear</ValueField>
           <LabelField>FinancialYear</LabelField>
         </DataSetReference>
