@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.10.12224.181</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-11-23T16:13:28.5104638Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-11-25T17:30:32.0407412Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -19,74 +19,16 @@
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>cd87f048-e641-414d-a914-e496ee6f7152</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="PnLReportXMLDataSource">
+      <ConnectionProperties>
+        <DataProvider>XML</DataProvider>
+        <ConnectString>http://localhost:50786/PnLReportSoapService.asmx</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>82d176e6-2964-47b1-ac7c-6cf2e21b620f</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsPnL12Months">
-      <SharedDataSet>
-        <SharedDataSetReference>dsPnL12Months</SharedDataSetReference>
-        <QueryParameters>
-          <QueryParameter Name="@FinancialYear">
-            <Value>=Parameters!FinancialYear.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@FinancialMonth">
-            <Value>=Parameters!FinancialMonth.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ReportType">
-            <Value>=Parameters!ReportType.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-      </SharedDataSet>
-      <Fields>
-        <Field Name="ksnz_AccountMapDetailID">
-          <DataField>ksnz_AccountMapDetailID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DisplayParentID">
-          <DataField>DisplayParentID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="AccountNumber">
-          <DataField>AccountNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="AccountName">
-          <DataField>AccountName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DisplayOrder">
-          <DataField>DisplayOrder</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DisplayLevel">
-          <DataField>DisplayLevel</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="IsTotal">
-          <DataField>IsTotal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FinancialYear">
-          <DataField>FinancialYear</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="FinancialMonth">
-          <DataField>FinancialMonth</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="LongMonthName">
-          <DataField>LongMonthName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Amount">
-          <DataField>Amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="TwelveMonthTotal">
-          <DataField>TwelveMonthTotal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
     <DataSet Name="dsFinancialYears">
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
@@ -97,6 +39,87 @@
         <Field Name="FinancialYear">
           <DataField>FinancialYear</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="PnLReportDataset">
+      <Query>
+        <DataSourceName>PnLReportXMLDataSource</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="financialYear">
+            <Value>=Parameters!FinancialYear.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="financialMonth">
+            <Value>=Parameters!FinancialMonth.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="reportType">
+            <Value>=Parameters!ReportType.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+  &lt;Method Namespace="http://tempuri.org/"
+          Name="GetPnLReport" /&gt;
+  &lt;SoapAction&gt;http://tempuri.org/GetPnLReport&lt;/SoapAction&gt;
+  &lt;ElementPath IgnoreNamespaces="true"&gt;
+    GetPnLReportResponse/GetPnLReportResult/PnLReportModel
+  &lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="AccountMapDetailID">
+          <DataField>AccountMapDetailID</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="xmlns">
+          <DataField>xmlns</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DisplayParentID">
+          <DataField>DisplayParentID</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="AccountNumber">
+          <DataField>AccountNumber</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="DisplayOrder">
+          <DataField>DisplayOrder</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="DisplayLevel">
+          <DataField>DisplayLevel</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="IsTotal">
+          <DataField>IsTotal</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="FinancialYear">
+          <DataField>FinancialYear</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="FinancialMonth">
+          <DataField>FinancialMonth</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="LongMonthName">
+          <DataField>LongMonthName</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="TwelveMonthTotal">
+          <DataField>TwelveMonthTotal</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
         </Field>
       </Fields>
     </DataSet>
@@ -247,10 +270,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.92292in</Width>
+                  <Width>0.89792in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.92292in</Width>
+                  <Width>0.89792in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -266,9 +289,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Amount.Value)</Value>
+                                  <Value>=Sum(CDec(Fields!Amount.Value))</Value>
                                   <Style>
-                                    <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
@@ -299,10 +321,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Max(Fields!TwelveMonthTotal.Value)</Value>
+                                  <Value>=Max(CDec(Fields!TwelveMonthTotal.Value))</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
@@ -505,12 +526,12 @@
                 <TablixMember>
                   <Group Name="RowGroup">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!ksnz_AccountMapDetailID.Value</GroupExpression>
+                      <GroupExpression>=Fields!AccountMapDetailID.Value</GroupExpression>
                     </GroupExpressions>
                     <Parent>=Fields!DisplayParentID.Value</Parent>
                   </Group>
                   <TablixHeader>
-                    <Size>1.63125in</Size>
+                    <Size>1.73125in</Size>
                     <CellContents>
                       <Textbox Name="Textbox57">
                         <CanGrow>true</CanGrow>
@@ -546,7 +567,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.65625in</Size>
+                        <Size>1.74791in</Size>
                         <CellContents>
                           <Textbox Name="Textbox62">
                             <CanGrow>true</CanGrow>
@@ -589,11 +610,11 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dsPnL12Months</DataSetName>
+            <DataSetName>PnLReportDataset</DataSetName>
             <Top>0.16666in</Top>
             <Left>0.62167in</Left>
             <Height>0.75in</Height>
-            <Width>5.13334in</Width>
+            <Width>5.275in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -607,7 +628,7 @@
       <Width>7.60833in</Width>
       <Page>
         <PageHeader>
-          <Height>0.88834in</Height>
+          <Height>0.97167in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>

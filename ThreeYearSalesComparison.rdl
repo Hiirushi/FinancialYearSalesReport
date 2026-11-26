@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.10.12224.181</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-11-20T06:32:25.8513202Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-11-25T16:33:15.1785183Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -19,53 +19,16 @@
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>78e29e71-674a-42ec-9660-23d7434a4387</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="dsThreeYearSalesComparison">
+      <ConnectionProperties>
+        <DataProvider>XML</DataProvider>
+        <ConnectString>http://localhost:50786/ThreeYearSalesComparisonSoapService.asmx</ConnectString>
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>49502698-31d3-4ed2-986c-b39d963b4afe</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ThreeYearSalesDataset">
-      <Query>
-        <DataSourceName>ThreeYearSalesDataset</DataSourceName>
-        <QueryParameters>
-          <QueryParameter Name="@FinancialYear">
-            <Value>=Parameters!FinancialYear.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@FinancialMonth">
-            <Value>=Parameters!FinancialMonth.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@SelectionType">
-            <Value>=Parameters!SelectionType.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <CommandText>EXEC dbo.usp_GetThreeYearSalesComparison
- 
-   @FinancialYear = @FinancialYear,
-    
-   @FinancialMonth = @FinancialMonth,
-    
-   @SelectionType = @SelectionType;</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="SalesPerson">
-          <DataField>SalesPerson</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CustomerName">
-          <DataField>CustomerName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PreviousYear2Sales">
-          <DataField>PreviousYear2Sales</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="PreviousYear1Sales">
-          <DataField>PreviousYear1Sales</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="SelectedYearSales">
-          <DataField>SelectedYearSales</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-    </DataSet>
     <DataSet Name="dsFinancialYears">
       <Query>
         <DataSourceName>ThreeYearSalesDataset</DataSourceName>
@@ -87,6 +50,55 @@ ORDER BY FinancialYear;</CommandText>
         <Field Name="FinancialYear">
           <DataField>FinancialYear</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="dsThreeYearSalesComparison">
+      <Query>
+        <DataSourceName>dsThreeYearSalesComparison</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="financialYear">
+            <Value>=Parameters!FinancialYear.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="financialMonth">
+            <Value>=Parameters!FinancialMonth.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+          <QueryParameter Name="selectionType">
+            <Value>=Parameters!SelectionType.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>&lt;Query&gt;
+  &lt;Method Namespace="http://tempuri.org/"
+          Name="GetThreeYearSalesComparison" /&gt;
+  &lt;SoapAction&gt;http://tempuri.org/GetThreeYearSalesComparison&lt;/SoapAction&gt;
+  &lt;ElementPath IgnoreNamespaces="true"&gt;
+    GetThreeYearSalesComparisonResponse/GetThreeYearSalesComparisonResult/ThreeYearSalesReportModel
+  &lt;/ElementPath&gt;
+&lt;/Query&gt;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="SalesPerson">
+          <DataField>SalesPerson</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="CustomerName">
+          <DataField>CustomerName</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="PreviousYear2Sales">
+          <DataField>PreviousYear2Sales</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="PreviousYear1Sales">
+          <DataField>PreviousYear1Sales</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="SelectedYearSales">
+          <DataField>SelectedYearSales</DataField>
+          <rd:UserDefined>true</rd:UserDefined>
         </Field>
       </Fields>
     </DataSet>
@@ -321,7 +333,7 @@ ORDER BY FinancialYear;</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PreviousYear2Sales.Value)</Value>
+                                  <Value>=Sum(CDec(Fields!PreviousYear2Sales.Value))</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -354,7 +366,7 @@ ORDER BY FinancialYear;</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PreviousYear1Sales.Value)</Value>
+                                  <Value>=Sum(CDec(Fields!PreviousYear1Sales.Value))</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -387,7 +399,7 @@ ORDER BY FinancialYear;</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!SelectedYearSales.Value)</Value>
+                                  <Value>=Sum(CDec(Fields!SelectedYearSales.Value))</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -438,7 +450,7 @@ ORDER BY FinancialYear;</CommandText>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingLeft>20pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
@@ -590,7 +602,7 @@ ORDER BY FinancialYear;</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PreviousYear2Sales.Value)</Value>
+                                  <Value>=Sum(CDec(Fields!PreviousYear2Sales.Value))</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -623,7 +635,7 @@ ORDER BY FinancialYear;</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PreviousYear1Sales.Value)</Value>
+                                  <Value>=Sum(CDec(Fields!PreviousYear1Sales.Value))</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -657,7 +669,7 @@ ORDER BY FinancialYear;</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!SelectedYearSales.Value)</Value>
+                                  <Value>=Sum(CDec(Fields!SelectedYearSales.Value))</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00)</Format>
@@ -726,11 +738,11 @@ ORDER BY FinancialYear;</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <KeepTogether>true</KeepTogether>
-            <DataSetName>ThreeYearSalesDataset</DataSetName>
+            <DataSetName>dsThreeYearSalesComparison</DataSetName>
             <Top>0.25555in</Top>
             <Left>0.52153in</Left>
             <Height>1in</Height>
-            <Width>6.5916in</Width>
+            <Width>6.59161in</Width>
             <Style>
               <Border>
                 <Style>None</Style>

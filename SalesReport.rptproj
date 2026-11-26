@@ -49,9 +49,6 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
-    <DataSet Include="dsPnL12Months.rsd" />
-  </ItemGroup>
-  <ItemGroup>
     <DataSource Include="TestDB_DataSource.rds" />
   </ItemGroup>
   <ItemGroup>
