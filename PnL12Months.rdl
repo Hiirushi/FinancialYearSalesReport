@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>18.10.12224.181</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-11-26T02:19:45.2222298Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-11-26T03:07:12.8710815Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -28,10 +28,7 @@
       <rd:DataSourceID>82d176e6-2964-47b1-ac7c-6cf2e21b620f</rd:DataSourceID>
     </DataSource>
     <DataSource Name="dsFinancialYears">
-      <ConnectionProperties>
-        <DataProvider>XML</DataProvider>
-        <ConnectString>http://localhost:50786/WebServices/FinancialYearSoapService.asmx</ConnectString>
-      </ConnectionProperties>
+      <DataSourceReference>dsFinancialYears</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>99ccea8d-19ec-459d-8a07-714f6e23daba</rd:DataSourceID>
     </DataSource>

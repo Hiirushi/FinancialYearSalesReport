@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="dsFinancialYears">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>http://localhost:50786/WebServices/FinancialYearSoapService.asmx</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>e092a7ab-8bef-448f-97b9-c726f666de2e</DataSourceID>
+</RptDataSource>

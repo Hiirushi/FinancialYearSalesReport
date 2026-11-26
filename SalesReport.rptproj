@@ -49,6 +49,7 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
+    <DataSource Include="dsFinancialYears.rds" />
     <DataSource Include="TestDB_DataSource.rds" />
   </ItemGroup>
   <ItemGroup>
